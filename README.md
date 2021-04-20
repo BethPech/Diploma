@@ -18,9 +18,10 @@
 
 3.**Для запуска SUT открываем новую вкладку в Терминале IDEA и вводим следующую команду:**
 - для **MySQL**:
-`java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar artifacts/aqa-shop.jar`
+`java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar ./artifacts/aqa-shop.jar`
+Для повторного использования тестов необходимо перезапустить SUT
 - для **PostgreSQL**:
-`java -Dspring.datasource-postgresql.url=jdbc:postgresql://localhost:5432/app -jar artifacts/aqa-shop.jar`
+`java -Dspring.datasource-postgresql.url=jdbc:postgresql://localhost:5432/app -jar ./artifacts/aqa-shop.jar`
  
  4.**Для запуска авто-тестов необходимо открыть новую вкладку в теминале и ввести команду:**
  - для **MySQL**: `gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app`
