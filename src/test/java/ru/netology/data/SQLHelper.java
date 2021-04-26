@@ -1,6 +1,5 @@
 package ru.netology.data;
 
-import lombok.Data;
 import lombok.val;
 import org.apache.commons.dbutils.QueryRunner;
 
@@ -104,5 +103,4 @@ public class SQLHelper {
         }
         return status;
     }
-
 }
