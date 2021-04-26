@@ -15,7 +15,6 @@ allure {
     }
 }
 
-sourceCompatibility = 11
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -33,8 +32,8 @@ dependencies {
     testImplementation 'mysql:mysql-connector-java:8.0.18'
     testImplementation 'io.rest-assured:rest-assured:4.3.0'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(dir: 'artifacts', include: ['*.jar'])
+    testImplementation 'com.google.cloud.tools:appengine-gradle-plugin:2.4.1'
 }
 
 test{
@@ -43,4 +42,5 @@ test{
     systemProperty 'db.url', System.getProperty('db.url')
     systemProperty 'db.user', System.getProperty('db.user', 'app')
     systemProperty 'db.password', System.getProperty('db.password', 'pass')
+    systemProperty 'http.port', System.getProperties().put( "server.port", 8080 )
 }

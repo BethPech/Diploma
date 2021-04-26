@@ -105,6 +105,4 @@ public class SQLHelper {
         return status;
     }
 
-
-
 }

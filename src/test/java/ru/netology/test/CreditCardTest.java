@@ -28,7 +28,7 @@ public class CreditCardTest {
     @BeforeEach
     void setUp() {
         open("http://localhost:8080");
-        mainPage.payWithCreditCard();
+        mainPage.shouldPayWithCreditCard();
     }
 
     @AfterAll
@@ -45,8 +45,8 @@ public class CreditCardTest {
     @Test
     public void shouldSubmitIfApprovedCard() {
         val info = getValidApprovedCard();
-        paymentPage.fillForm(info);
-        paymentPage.successMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetSuccessMessage();
         val paymentId = getPaymentId();
         val expectedAmount = "4500000";
         val actualAmount = getPaymentAmount(paymentId);
@@ -59,8 +59,8 @@ public class CreditCardTest {
     @Test
     void shouldNotSubmitIfDeclinedCard() {
         val info = getValidDeclinedCard();
-        paymentPage.fillForm(info);
-        paymentPage.failMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetFailMessage();
         val paymentId = getPaymentId();
         val expectedStatus = "DECLINED";
         val actualStatus = getStatusForPaymentWithDebitCard(paymentId);
@@ -71,148 +71,148 @@ public class CreditCardTest {
     @Test
     void shouldNotSubmitIfFieldCardEmpty() {
         val info = getEmptyCard();
-        paymentPage.fillForm(info);
+        paymentPage.shouldFillForm(info);
         paymentPage.shouldFillMessage();
     }
 
     @Test
     void shouldNotSubmitIfCardNotFull() {
         val info = getInvalidCardWith15Numbers();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
     @Test
     void shouldNotSubmitIfAnotherBankCard() {
         val info = getAnotherBankCard();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
 
     @Test
     void shouldNotSubmitIfEmptyMonth() {
         val info = getEmptyMonth();
-        paymentPage.fillForm(info);
+        paymentPage.shouldFillForm(info);
         paymentPage.shouldFillMessage();
     }
 
     @Test
     void shouldNotSubmitIfMonthIsZero() {
         val info = getInvalidFormatMonthIsZero();
-        paymentPage.fillForm(info);
-        paymentPage.wrongTermMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongTermMessage();
     }
 
     @Test
     void shouldNotSubmitIfMonth1Number() {
         val info = getInvalidFormatMonthIsOneNumber();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
     @Test
     void shouldNotSubmitIfMonthIncorrect() {
         val info = getInvalidFormatMonthIsIncorrect();
-        paymentPage.fillForm(info);
-        paymentPage.wrongTermMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongTermMessage();
     }
 
     @Test
     void shouldNotSubmitIfYearEmpty() {
         val info = getEmptyYear();
-        paymentPage.fillForm(info);
+        paymentPage.shouldFillForm(info);
         paymentPage.shouldFillMessage();
     }
 
     @Test
     void shouldNotSubmitIfYearEarly() {
         val info = getEarlyYear();
-        paymentPage.fillForm(info);
-        paymentPage.cardExpiredMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGeCardExpiredMessage();
     }
 
     @Test
     void shouldNotSubmitIfYearFuture() {
         val info = getFutureYear();
-        paymentPage.fillForm(info);
-        paymentPage.wrongTermMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongTermMessage();
     }
 
     @Test
     void shouldNotSubmitWhenOwnerEmpty() {
         val info = getEmptyOwner();
-        paymentPage.fillForm(info);
+        paymentPage.shouldFillForm(info);
         paymentPage.shouldFillMessage();
     }
 
     @Test
     void shouldNotSubmitIfOwnerUsingOneWord() {
         val info = getInvalidOwnerUsingOneWord();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
     @Test
     void shouldNotSubmitIf3Words() {
         val info = getInvalidOwnerWithThreeWords();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
     @Test
     void shouldNotSubmitIfOwnerUsingLowerCase() {
         val info = getInvalidOwnerWithLowerCase();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
     @Test
     void shouldNotSubmitIfOwnerUsingUpperCase() {
         val info = getInvalidOwnerWithUpperCase();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
     @Test
     void shouldNotSubmitIfOwnerRu() {
         val info = getInvalidOwnerRu();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
     @Test
     void shouldNotSubmitOwnersWithNumbers() {
         val info = getInvalidOwnerWithNumbers();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
     @Test
     void shouldNotSubmitOwnersWithSymbols() {
         val info = getInvalidOwnerWithSymbols();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
     @Test
     void shouldSubmitIfСVVIsEmpty() {
         val info = getEmptyCVV();
-        paymentPage.fillForm(info);
+        paymentPage.shouldFillForm(info);
         paymentPage.shouldFillMessage();
     }
 
     @Test
     void shouldNotSubmitIfCVVOneNumber() {
         val info = getInvalidCVVWith1Number();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 
     @Test
     void shouldNotSubmitIfCVVTwoNumbers() {
         val info = getInvalidCVVWith2Numbers();
-        paymentPage.fillForm(info);
-        paymentPage.wrongFormatMessage();
+        paymentPage.shouldFillForm(info);
+        paymentPage.shouldGetWrongFormatMessage();
     }
 }
